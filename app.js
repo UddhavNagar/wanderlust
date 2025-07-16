@@ -67,10 +67,10 @@ const sessionOptions = {
         httpOnly: true,
     }
 }
-app.get("/",(req,res)=>{
-    const allListings=await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
+app.get("/", (req, res) => {
+    res.redirect("/listings");
 });
+
 
 app.use(session(sessionOptions));
 app.use(flash());

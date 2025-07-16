@@ -3,6 +3,8 @@ if(process.env.NODE_ENV!="production"){   // to use only during devlopment for s
 }
 
 const express = require("express");
+const Listing = require("./models/listing");
+const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
@@ -65,9 +67,10 @@ const sessionOptions = {
         httpOnly: true,
     }
 }
-// app.get("/",(req,res)=>{
-//     res.send("Hii ,i am root");
-// });
+app.get("/",(req,res)=>{
+    const allListings=await Listing.find({});
+    res.render("listings/index.ejs",{allListings});
+});
 
 app.use(session(sessionOptions));
 app.use(flash());
